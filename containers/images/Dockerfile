@@ -1,4 +1,4 @@
-FROM golang:1.16.7-alpine3.14
+FROM golang:1.21.4-alpine
 WORKDIR /src
 
 COPY go.mod go.sum ./
@@ -11,7 +11,7 @@ FROM alpine
 WORKDIR /src
 
 COPY --from=0 /bin/app /bin/app
-COPY --from=0 src/views /src/views
-COPY --from=0 /assets /src/assets
+COPY --from=0 /src/views /src/views
+COPY --from=0 /src/assets /src/assets
 
 ENTRYPOINT ["/bin/app"]
