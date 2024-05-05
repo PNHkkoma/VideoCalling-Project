@@ -28,7 +28,7 @@ func Run() error {
 		*addr = ":8080"
 	}
 
-	engine := html.New("./views", ".html")
+	engine := html.New("../views", ".html")
 	app := fiber.New(fiber.Config{Views: engine})
 	app.Use(logger.New())
 	app.Use(cors.New())
@@ -48,7 +48,7 @@ func Run() error {
 	}))
 	app.Get("/stream/:suuid/chat/websocket", websocket.New(handlers.StreamWebsocket))
 	app.Get("/stream/:suuid/viewer/websocket", websocket.New(handlers.StreamViewerWebsocket))
-	app.Static("/", "./assets")
+	app.Static("/", "../assets")
 
 	w.Rooms = make(map[string]*w.Room)
 	w.Streams = make(map[string]*w.Room)
